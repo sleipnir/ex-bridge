@@ -17,6 +17,14 @@ public class Main implements Port {
     public int run(Worker worker, Output output, Object[] args) throws Exception {
         this.output = output;
 
-        return 0;
+        for (;;) {
+            for (var command : worker.drainCommands()) {
+                command.name();
+                command.args();
+                command.ref();
+
+                output.emit(null);
+            }
+        }
     }
 }
