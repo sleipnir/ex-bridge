@@ -1,4 +1,4 @@
-# Ex Multilang Bridge
+# Ex Bridge
 
 Elixir Bridge with other languages via Ports
 
@@ -10,7 +10,7 @@ by adding `ex_multilang_bridge` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_multilang_bridge, "~> 0.1.0"}
+    {:ex_bridge, "~> 0.1.0"}
   ]
 end
 ```
