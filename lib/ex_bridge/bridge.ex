@@ -32,6 +32,10 @@ defmodule ExBridge.Bridge do
     nil
   end
 
+  def start_link(manifest) do
+    GenServer.start_link(__MODULE__, manifest, name: __MODULE__)
+  end
+
   @impl GenServer
   def init(%Manifest{} = manifest) do
     Process.flag(:trap_exit, true)
@@ -39,7 +43,7 @@ defmodule ExBridge.Bridge do
     port = open(manifest)
     Process.put({__MODULE__, :port}, port)
 
-    {:ok, %{}}
+    {:ok, manifest}
   end
 
   @impl GenServer

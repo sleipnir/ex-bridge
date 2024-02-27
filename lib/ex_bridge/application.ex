@@ -7,12 +7,14 @@ defmodule ExBridge.Application do
     children = [
       {
         ExBridge.Bridge,
-        [
-          %ExBridge.Bridge.Manifest{
-            executable: "java",
-            arguments: []
-          }
-        ]
+        %ExBridge.Bridge.Manifest{
+          executable: "java",
+          arguments: [
+            "-cp",
+            "#{Application.app_dir(:ex_bridge)}/priv/drivers/java-port-0.1.0.jar",
+            "io.eigr.ports.java.Main"
+          ]
+        }
       }
     ]
 

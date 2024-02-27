@@ -42,9 +42,9 @@ public final class Driver {
         // Reading from the file descriptor 3, which is allocated by Elixir for input
         try (var input = new DataInputStream(new FileInputStream("/dev/fd/3"))) {
             List<Object> decodedArgs = new ArrayList<>();
-            for (var arg : args) {
-                decodedArgs.add(decodeArg(arg));
-            }
+            // for (var arg : args) {
+            // decodedArgs.add(decodeArg(arg));
+            // }
 
             var output = Output.start();
             var worker = Worker.start(port, output, decodedArgs.toArray());
