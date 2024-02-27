@@ -4,7 +4,17 @@ defmodule ExBridge.Application do
 
   @impl true
   def start(_type, _args) do
-    children = []
+    children = [
+      {
+        ExBridge.Bridge,
+        [
+          %ExBridge.Bridge.Manifest{
+            executable: "java",
+            arguments: []
+          }
+        ]
+      }
+    ]
 
     opts = [strategy: :one_for_one, name: ExBridge.Supervisor]
     Supervisor.start_link(children, opts)

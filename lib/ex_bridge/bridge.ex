@@ -5,8 +5,17 @@ defmodule ExBridge.Bridge do
   use GenServer
   require Logger
 
+  defmodule Manifest do
+    defstruct executable: nil, arguments: []
+
+    @type t :: %__MODULE__{
+            executable: String.t(),
+            arguments: list(String.t())
+          }
+  end
+
   @spec port :: port | nil
-  def port, do: Process.get({__MODULE__, :port})
+  def port(), do: Process.get({__MODULE__, :port})
 
   @spec command(port, String.t(), any(), pid()) :: :ok
   def command(port, name, args \\ [], caller \\ nil) do
@@ -24,10 +33,10 @@ defmodule ExBridge.Bridge do
   end
 
   @impl GenServer
-  def init({callback, init_opts, port_args}) do
+  def init(%Manifest{} = manifest) do
     Process.flag(:trap_exit, true)
 
-    port = open(init_opts, port_args)
+    port = open(manifest)
     Process.put({__MODULE__, :port}, port)
 
     {:ok, %{}}
@@ -50,20 +59,20 @@ defmodule ExBridge.Bridge do
     {:noreply, state}
   end
 
-  defp open(init_opts, port_args) do
+  defp open(manifest) do
     Port.open(
-      {:spawn_executable, System.find_executable(init_opts.executable)},
+      {:spawn_executable, System.find_executable(manifest.executable)},
       [
         :nouse_stdio,
         :binary,
         :exit_status,
-        packet: 4,
-        args: init_opts.arguments
+        # packet: 4,
+        args: manifest.arguments
       ]
     )
   end
 
-  defp close do
+  defp close() do
     port = port()
     # command(port, :stop)
 
