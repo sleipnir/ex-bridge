@@ -76,6 +76,7 @@ defmodule ExBridge.Bridge do
 
   @impl GenServer
   def handle_info({port, {:data, msg}}, state) when is_port(port) do
+    Logger.info("Received remote message #{inspect(msg)}")
     {:noreply, state}
   end
 
