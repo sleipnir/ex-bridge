@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: io.eigr.ports.java.AppTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in io.eigr.ports.java.AppTest
