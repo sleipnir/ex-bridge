@@ -11,7 +11,7 @@ defmodule ExBridge.Application do
           executable: "java",
           arguments: [
             "-cp",
-            "#{Application.app_dir(:ex_bridge)}/priv/drivers/java-port-0.1.0.jar",
+            "#{Application.app_dir(:ex_bridge)}/priv/drivers/java-port-0.1.0-jar-with-dependencies.jar",
             "io.eigr.ports.java.Main"
           ]
         }
