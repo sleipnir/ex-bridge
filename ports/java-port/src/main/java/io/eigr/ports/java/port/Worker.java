@@ -43,6 +43,9 @@ public final class Worker implements Runnable {
 
     void sendCommand(Port.Command command) {
         this.commands.add(command);
+        synchronized (this) {
+            notify(); // Notify the waiting thread about the new command
+        }
     }
 
     public Collection<Port.Command> drainCommands() {

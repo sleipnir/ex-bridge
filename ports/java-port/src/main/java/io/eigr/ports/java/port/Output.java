@@ -33,29 +33,35 @@ public final class Output implements Runnable {
         this.messages = new LinkedBlockingQueue<>();
     }
 
-    public void emitCallResponse(Port.Command command, CloudEvent response) throws InterruptedException {
+    public synchronized void emitCallResponse(Port.Command command, CloudEvent response) throws InterruptedException {
         this.emit(response);
     }
 
-    public void emit(CloudEvent message) throws InterruptedException {
+    public synchronized void emit(CloudEvent message) throws InterruptedException {
         this.emit(message, false);
     }
 
-    public void emit(CloudEvent message, boolean emitMetrics) throws InterruptedException {
+    public synchronized void emit(CloudEvent message, boolean emitMetrics) throws InterruptedException {
         Long now = null;
         if (emitMetrics) {
             now = System.nanoTime();
         }
 
         this.messages.put(message);
+
+        synchronized (this) {
+            notify(); // Notify the waiting thread about the emitted message
+        }
     }
 
     @Override
     public void run() {
-        // Writing to the file descriptor 4, which is allocated by Elixir for output
         try (var output = new DataOutputStream(new FileOutputStream("/dev/fd/4"))) {
             while (true) {
-                var message = this.messages.take();
+                synchronized (this) {
+                    wait(); // Wait for the emitted message
+                }
+                var message = this.messages.poll();
 
                 // writing to the port is to some extent a blocking operation, so we measure it
                 var sendingAt = System.nanoTime();

@@ -22,12 +22,17 @@ public final class Driver {
                 try {
                     // Read bytes from the input stream and parse protobuf message
                     CloudEvent message = readNextMessage(input);
+                    System.out.println(String.format("Received message %s", message));
                     var command = takeCommand(message);
                     worker.sendCommand(command);
+                    ((io.eigr.ports.java.Main) port).notifyExternalEvent(); // Notify Main about the external event
                 } catch (EOFException e) {
                     // Handle end of input stream (optional, based on your requirements)
                     handleException(e);
                     break;
+                } catch (NegativeArraySizeException nase) {
+                    nase.printStackTrace();
+                    System.out.println("Continue processing...");
                 }
             }
         } catch (IOException e) {

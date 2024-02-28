@@ -17,14 +17,21 @@ public class Main implements Port {
     public int run(Worker worker, Output output) throws Exception {
         this.output = output;
 
-        for (;;) {
-            for (var command : worker.drainCommands()) {
-                command.name();
-                command.args();
-                command.ref();
+        synchronized (this) {
+            while (true) {
+                wait(); // Wait for external events or messages
+                for (var command : worker.drainCommands()) {
+                    command.name();
+                    command.args();
+                    command.ref();
 
-                output.emit(null);
+                    output.emit(null);
+                }
             }
         }
+    }
+
+    public synchronized void notifyExternalEvent() {
+        notify(); // Notify the waiting thread about the external event
     }
 }

@@ -121,7 +121,6 @@ io/eigr/functions/protocol/Protocol$InvocationRequest$PayloadCase.class
 io/eigr/functions/protocol/Protocol$JSONType.class
 io/eigr/functions/protocol/Protocol.class
 io/eigr/functions/protocol/actors/ActorOuterClass$TimeoutStrategy$1.class
-io/eigr/ports/java/port/Erlang.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSystem$1.class
 io/eigr/functions/protocol/Protocol$ActorInvocation$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorDeactivationStrategyOrBuilder.class
@@ -158,7 +157,6 @@ io/eigr/functions/protocol/Protocol$Context.class
 io/eigr/functions/protocol/Protocol$ForwardOrBuilder.class
 io/eigr/functions/protocol/Protocol$JSONType$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Registry$Builder.class
-io/eigr/ports/java/port/Output$Message.class
 io/eigr/ports/java/port/Driver.class
 io/eigr/ports/java/port/Worker.class
 io/eigr/functions/protocol/Protocol$Workflow$RoutingCase.class

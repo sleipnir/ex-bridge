@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="io.eigr.ports.java.AppTest" time="0.003" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="io.eigr.ports.java.AppTest" time="0.025" errors="0" skipped="0">
   <properties>
     <property name="os.detected.version" value="5.18"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -51,7 +51,7 @@
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="20"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean package"/>
     <property name="java.home" value="/home/sleipnir/.sdkman/candidates/java/20.ea.15-open"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -68,5 +68,5 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="os.detected.release.like.pop" value="true"/>
   </properties>
-  <testcase classname="io.eigr.ports.java.AppTest" name="testApp" time="0.003"/>
+  <testcase classname="io.eigr.ports.java.AppTest" name="testApp" time="0.025"/>
 </testsuite>

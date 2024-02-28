@@ -5,6 +5,10 @@ defmodule ExBridge.Bridge do
   use GenServer
   require Logger
 
+  alias Io.Cloudevents.V1.CloudEvent
+
+  @instance_id UUID.uuid1()
+
   defmodule Manifest do
     defstruct executable: nil, arguments: []
 
@@ -17,19 +21,28 @@ defmodule ExBridge.Bridge do
   @spec port :: port | nil
   def port(), do: Process.get({__MODULE__, :port})
 
-  @spec command(port, String.t(), any(), pid()) :: :ok
-  def command(port, name, args \\ [], caller \\ nil) do
-    data = serialize(name, args, caller)
+  @spec command(port, String.t(), binary(), pid()) :: :ok
+  def command(port, name, payload, caller \\ nil) do
+    data = serialize(name, payload, caller)
+    IO.inspect(data, label: "Sending payload")
     Port.command(port, data)
     :ok
   end
 
-  defp serialize(name, args, caller) when not is_nil(caller) and is_pid(caller) do
+  defp serialize(name, payload, caller) when not is_nil(caller) and is_pid(caller) do
     ref =
       :erlang.pid_to_list(caller)
       |> to_string()
 
-    nil
+    event = %CloudEvent{
+      id: UUID.uuid1(),
+      source: "/spawn/proxy/instance/#{@instance_id}",
+      spec_version: "1.0",
+      type: name,
+      data: {:binary_data, payload}
+    }
+
+    CloudEvent.encode(event)
   end
 
   def start_link(manifest) do
@@ -41,6 +54,9 @@ defmodule ExBridge.Bridge do
     Process.flag(:trap_exit, true)
 
     port = open(manifest)
+    IO.inspect(port)
+    IO.inspect(Port.info(port))
+
     Process.put({__MODULE__, :port}, port)
 
     {:ok, manifest}
@@ -67,7 +83,7 @@ defmodule ExBridge.Bridge do
     Port.open(
       {:spawn_executable, System.find_executable(manifest.executable)},
       [
-        :nouse_stdio,
+        # :nouse_stdio,
         :binary,
         :exit_status,
         args: manifest.arguments
