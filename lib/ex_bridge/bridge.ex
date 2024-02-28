@@ -70,7 +70,6 @@ defmodule ExBridge.Bridge do
         :nouse_stdio,
         :binary,
         :exit_status,
-        # packet: 4,
         args: manifest.arguments
       ]
     )

@@ -1,6 +1,7 @@
 # Ex Bridge
 
-Elixir Bridge with other languages via Ports
+Elixir Bridge with other languages via Ports.
+This project is heavily inspired by https://github.com/happening-oss/kafka-client
 
 ## Installation
 
