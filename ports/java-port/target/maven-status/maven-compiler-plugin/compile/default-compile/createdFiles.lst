@@ -18,6 +18,7 @@ io/eigr/functions/protocol/Protocol$SpawnRequestOrBuilder.class
 io/eigr/functions/protocol/Protocol$SpawnRequest$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$FixedTimerAction$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSystem.class
+io/cloudevents/v1/proto/CloudEvent$CloudEventAttributeValue$Builder.class
 io/eigr/functions/protocol/Protocol$ServiceInfo.class
 io/eigr/ports/java/port/Port.class
 io/eigr/functions/protocol/actors/ActorOuterClass$FixedTimerAction.class
@@ -42,8 +43,11 @@ io/eigr/functions/protocol/Protocol$InvocationResponse$1.class
 io/eigr/functions/protocol/Protocol$JSONType$Builder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorId.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSettings.class
+io/cloudevents/v1/proto/CloudEvent$AttributesDefaultEntryHolder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSettingsOrBuilder.class
+io/cloudevents/v1/proto/CloudEvent$CloudEventAttributeValue.class
 io/eigr/functions/protocol/Protocol$JSONTypeOrBuilder.class
+io/cloudevents/v1/proto/CloudEvent$CloudEventAttributeValue$AttrCase.class
 io/eigr/functions/protocol/Protocol$RegistrationRequestOrBuilder.class
 io/eigr/functions/protocol/Protocol$SideEffect$Builder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSnapshotStrategy.class
@@ -56,6 +60,7 @@ io/eigr/functions/protocol/Protocol$ActorInvocationResponse.class
 io/eigr/functions/protocol/Protocol$InvocationRequest$MetadataDefaultEntryHolder.class
 io/eigr/functions/protocol/Protocol$ActorInvocationResponseOrBuilder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSettings$Builder.class
+io/cloudevents/v1/proto/CloudEvent$CloudEventAttributeValueOrBuilder.class
 io/eigr/functions/protocol/Protocol$Forward.class
 io/eigr/functions/protocol/Protocol$Context$1.class
 io/eigr/functions/protocol/Protocol$ActorInvocation$PayloadCase.class
@@ -75,10 +80,12 @@ io/eigr/functions/protocol/Protocol$InvocationRequestOrBuilder.class
 io/eigr/ports/java/Main.class
 io/eigr/functions/protocol/state/State$Revision$1.class
 io/eigr/functions/protocol/Protocol$1.class
+io/cloudevents/v1/proto/CloudEvent$CloudEventAttributeValue$1.class
 io/eigr/functions/protocol/Protocol$Pipe$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorState$TagsDefaultEntryHolder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Kind.class
 io/eigr/functions/protocol/Protocol$Workflow$Builder.class
+io/cloudevents/v1/proto/CloudEvent$Builder.class
 io/eigr/functions/protocol/Protocol$Workflow.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorDeactivationStrategy$Builder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorDeactivationStrategy$1.class
@@ -97,6 +104,7 @@ com/google/protobuf/AnyProto.class
 com/google/protobuf/AnyOrBuilder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorState.class
 io/eigr/functions/protocol/Protocol$Status.class
+io/cloudevents/v1/proto/CloudEventOrBuilder.class
 io/eigr/functions/protocol/Protocol$RequestStatus.class
 io/eigr/functions/protocol/Protocol$ProxyInfoOrBuilder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorStateOrBuilder.class
@@ -131,10 +139,14 @@ io/eigr/functions/protocol/Protocol$ProxyInfo$Builder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Action.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Registry$ActorsDefaultEntryHolder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$MetadataOrBuilder.class
+io/cloudevents/v1/proto/Spec.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Metadata.class
+io/cloudevents/v1/proto/CloudEvent$DataCase.class
+io/cloudevents/v1/proto/CloudEvent.class
 io/eigr/functions/protocol/Protocol$Pipe.class
 io/eigr/functions/protocol/Protocol$ActorInvocation.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Actor$1.class
+io/cloudevents/v1/proto/CloudEvent$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$TimeoutStrategyOrBuilder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSnapshotStrategy$1.class
 io/eigr/ports/java/port/Port$Command.class
@@ -150,6 +162,7 @@ io/eigr/ports/java/port/Output$Message.class
 io/eigr/ports/java/port/Driver.class
 io/eigr/ports/java/port/Worker.class
 io/eigr/functions/protocol/Protocol$Workflow$RoutingCase.class
+io/cloudevents/v1/proto/CloudEvent$2.class
 io/eigr/functions/protocol/Protocol$RequestStatusOrBuilder.class
 io/eigr/functions/protocol/state/State$Revision$Builder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Actor$Builder.class

@@ -9,8 +9,8 @@ import java.util.concurrent.LinkedBlockingQueue;
  * The worker thread of a port program. See {@link Driver} for details.
  */
 public final class Worker implements Runnable {
-    static Worker start(Port port, Output output, Object[] args) {
-        var worker = new Worker(port, output, args);
+    static Worker start(Port port, Output output) {
+        var worker = new Worker(port, output);
 
         // Using a daemon thread to ensure program termination if the main thread stops.
         var consumerThread = new Thread(worker);
@@ -23,18 +23,16 @@ public final class Worker implements Runnable {
     private final BlockingQueue<Port.Command> commands = new LinkedBlockingQueue<>();
     private final Port port;
     private final Output output;
-    private final Object[] args;
 
-    private Worker(Port port, Output output, Object[] args) {
+    private Worker(Port port, Output output) {
         this.port = port;
         this.output = output;
-        this.args = args;
     }
 
     @Override
     public void run() {
         try {
-            var exitStatus = this.port.run(this, this.output, this.args);
+            var exitStatus = this.port.run(this, this.output);
             System.exit(exitStatus);
         } catch (Exception e) {
             System.err.println(e.getMessage());

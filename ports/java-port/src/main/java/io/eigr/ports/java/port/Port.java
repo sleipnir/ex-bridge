@@ -8,7 +8,7 @@ package io.eigr.ports.java.port;
 public interface Port {
     // Invoked in the worker thread to run main port loop. After the function
     // returns, the program will stop, using the returned value as the exit code.
-    int run(Worker worker, Output output, Object[] args) throws Exception;
+    int run(Worker worker, Output output) throws Exception;
 
     record Command(String name, Object[] args, String ref) {
     }

@@ -14,7 +14,7 @@ public class Main implements Port {
     }
 
     @Override
-    public int run(Worker worker, Output output, Object[] args) throws Exception {
+    public int run(Worker worker, Output output) throws Exception {
         this.output = output;
 
         for (;;) {
