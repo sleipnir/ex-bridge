@@ -22,17 +22,16 @@ public final class Driver {
                 try {
                     // Read bytes from the input stream and parse protobuf message
                     CloudEvent message = readNextMessage(input);
-                    System.out.println(String.format("Received message %s", message));
-                    var command = takeCommand(message);
-                    worker.sendCommand(command);
-                    ((io.eigr.ports.java.Main) port).notifyExternalEvent(); // Notify Main about the external event
+                    if (message != null) {
+                        System.out.println(String.format("Received message %s", message));
+                        var command = takeCommand(message);
+                        worker.sendCommand(command);
+                        ((io.eigr.ports.java.Main) port).notifyExternalEvent(); // Notify Main about the external event
+                    }
                 } catch (EOFException e) {
                     // Handle end of input stream (optional, based on your requirements)
                     handleException(e);
                     break;
-                } catch (NegativeArraySizeException nase) {
-                    nase.printStackTrace();
-                    System.out.println("Continue processing...");
                 }
             }
         } catch (IOException e) {
@@ -41,16 +40,24 @@ public final class Driver {
     }
 
     private static CloudEvent readNextMessage(FileInputStream input) throws IOException {
-        // Read the length of the message
-        DataInputStream dataInputStream = new DataInputStream(input);
-        int messageLength = dataInputStream.readInt();
+        try {
+            // Read the length of the message
+            DataInputStream dataInputStream = new DataInputStream(input);
+            int messageLength = dataInputStream.readInt();
 
-        // Read the message bytes
-        byte[] messageBytes = new byte[messageLength];
-        dataInputStream.readFully(messageBytes);
+            // Read the message bytes
+            byte[] messageBytes = new byte[messageLength];
+            dataInputStream.readFully(messageBytes);
 
-        // Parse the protobuf message
-        return CloudEvent.parseFrom(messageBytes);
+            System.out.println(messageBytes);
+
+            // Parse the protobuf message
+            return CloudEvent.parseFrom(messageBytes);
+        } catch (NegativeArraySizeException e) {
+
+        }
+
+        return null;
     }
 
     private static Port.Command takeCommand(CloudEvent message) {
