@@ -14,7 +14,7 @@
     <maven.compile.source>17</maven.compile.source>
     <maven.compile.target>17</maven.compile.target>
     <project.encoding>UTF-8</project.encoding>
-    <protobuf.version>3.22.2</protobuf.version>
+    <protobuf.version>3.24.4</protobuf.version>
   </properties>
 
   <dependencies>
@@ -22,6 +22,11 @@
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
         <version>${protobuf.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>io.cloudevents</groupId>
+        <artifactId>cloudevents-protobuf</artifactId>
+        <version>2.5.0</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>

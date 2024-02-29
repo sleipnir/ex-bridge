@@ -1,8 +1,8 @@
 package io.eigr.ports.java;
 
 import io.eigr.ports.java.port.Driver;
-import io.eigr.ports.java.port.Port;
 import io.eigr.ports.java.port.Output;
+import io.eigr.ports.java.port.Port;
 import io.eigr.ports.java.port.Worker;
 
 public class Main implements Port {
