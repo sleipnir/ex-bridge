@@ -108,6 +108,7 @@ io/cloudevents/v1/proto/CloudEventOrBuilder.class
 io/eigr/functions/protocol/Protocol$RequestStatus.class
 io/eigr/functions/protocol/Protocol$ProxyInfoOrBuilder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorStateOrBuilder.class
+io/eigr/ports/java/port/PortImpl.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorDeactivationStrategy$StrategyCase.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorState$1.class
 io/eigr/functions/protocol/Protocol$InvocationRequest$Builder.class
@@ -148,7 +149,6 @@ io/eigr/functions/protocol/actors/ActorOuterClass$Actor$1.class
 io/cloudevents/v1/proto/CloudEvent$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$TimeoutStrategyOrBuilder.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorSnapshotStrategy$1.class
-io/eigr/ports/java/port/Port$Command.class
 io/eigr/functions/protocol/actors/ActorOuterClass$ActorState$Builder.class
 io/eigr/functions/protocol/Protocol$Forward$Builder.class
 io/eigr/functions/protocol/Protocol$InvocationResponseOrBuilder.class
@@ -158,7 +158,6 @@ io/eigr/functions/protocol/Protocol$ForwardOrBuilder.class
 io/eigr/functions/protocol/Protocol$JSONType$1.class
 io/eigr/functions/protocol/actors/ActorOuterClass$Registry$Builder.class
 io/eigr/ports/java/port/Driver.class
-io/eigr/ports/java/port/Worker.class
 io/eigr/functions/protocol/Protocol$Workflow$RoutingCase.class
 io/cloudevents/v1/proto/CloudEvent$2.class
 io/eigr/functions/protocol/Protocol$RequestStatusOrBuilder.class

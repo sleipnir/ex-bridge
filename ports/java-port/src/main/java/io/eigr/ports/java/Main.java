@@ -2,29 +2,49 @@ package io.eigr.ports.java;
 
 import io.eigr.ports.java.port.Driver;
 import io.eigr.ports.java.port.Output;
-import io.eigr.ports.java.port.Port;
-import io.eigr.ports.java.port.Worker;
 
-public class Main implements Port {
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
 
-    private Output output;
+import io.cloudevents.v1.proto.CloudEvent;
 
-    public static void main(String[] args) {
-        Driver.run(args, new Main());
+public class Main {
+
+    public static void main(String[] args) throws InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        executor.submit(() -> Driver.run(args));
+        executor.submit(() -> {
+            // Simulate Elixir sending messages asynchronously
+
+            IntStream.range(0, 20000)
+                    // .parallel()
+                    .forEach(index -> {
+                        Driver.sendAsyncCommand(generateAsyncMessage(index));
+                    });
+            // for (int i = 0; i < 5; i++) {
+            // Driver.sendAsyncCommand(generateAsyncMessage(i));
+            // try {
+            // Thread.sleep(1000);
+            // } catch (InterruptedException e) {
+            // e.printStackTrace();
+            // }
+            // }
+        });
+
+        executor.shutdown();
+
+        Thread.sleep(Long.MAX_VALUE);
     }
 
-    @Override
-    public int run(Worker worker, Output output) throws Exception {
-        this.output = output;
-
-        for (;;) {
-            for (var command : worker.drainCommands()) {
-                command.name();
-                command.args();
-                command.ref();
-
-                output.emit(null);
-            }
-        }
+    private static CloudEvent generateAsyncMessage(int index) {
+        CloudEvent event = CloudEvent.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSpecVersion("1.0")
+                .setType(Integer.toString(index))
+                .build();
+        return event;
     }
 }

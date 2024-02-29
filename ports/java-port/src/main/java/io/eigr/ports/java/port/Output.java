@@ -16,59 +16,59 @@ import io.cloudevents.v1.proto.CloudEvent;
  * details on data encoding.
  */
 public final class Output implements Runnable {
-    static Output start() {
-        var output = new Output();
-
-        // Using a daemon thread to ensure program termination if the main thread stops.
-        var consumerThread = new Thread(output);
-        consumerThread.setDaemon(true);
-        consumerThread.start();
-
-        return output;
-    }
-
+    private final DataOutputStream output;
     private final BlockingQueue<CloudEvent> messages;
 
-    private Output() {
+    private Output(DataOutputStream output) {
+        this.output = output;
         this.messages = new LinkedBlockingQueue<>();
     }
 
-    public void emitCallResponse(Port.Command command, CloudEvent response) throws InterruptedException {
-        this.emit(response);
-    }
+    static Output start() {
+        try {
+            var outputStream = new DataOutputStream(new FileOutputStream("/dev/fd/4"));
+            var output = new Output(outputStream);
 
-    public void emit(CloudEvent message) throws InterruptedException {
-        this.emit(message, false);
-    }
+            // Using a daemon thread to ensure program termination if the main thread stops.
+            var consumerThread = new Thread(output);
+            consumerThread.setDaemon(true);
+            consumerThread.start();
 
-    public void emit(CloudEvent message, boolean emitMetrics) throws InterruptedException {
-        Long now = null;
-        if (emitMetrics) {
-            now = System.nanoTime();
+            return output;
+        } catch (IOException e) {
+            handleException(e);
+            return null;
         }
+    }
 
-        this.messages.put(message);
+    public void emit(CloudEvent message) {
+        try {
+            byte[] messageBytes = message.toByteArray();
+            output.write(messageBytes);
+        } catch (IOException e) {
+            handleException(e);
+        }
     }
 
     @Override
     public void run() {
-        // Writing to the file descriptor 4, which is allocated by Elixir for output
-        try (var output = new DataOutputStream(new FileOutputStream("/dev/fd/4"))) {
-            while (true) {
-                var message = this.messages.take();
-
-                // writing to the port is to some extent a blocking operation, so we measure it
-                var sendingAt = System.nanoTime();
-                this.notify(output, message);
+        while (true) {
+            try {
+                var message = messages.take();
+                emit(message);
+            } catch (InterruptedException e) {
+                handleException(e);
             }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
         }
     }
 
-    private void notify(DataOutputStream output, CloudEvent event) throws IOException {
-        output.write(event.toByteArray());
+    public void enqueueMessage(CloudEvent message) {
+        messages.offer(message);
+    }
+
+    private static void handleException(Exception e) {
+        System.err.println(e.getMessage());
+        e.printStackTrace();
+        System.exit(1);
     }
 }

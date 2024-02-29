@@ -23,7 +23,8 @@ defmodule ExBridge.MixProject do
   defp deps do
     [
       {:protobuf, "~> 0.11"},
-      {:protobuf_generate, "~> 0.1"}
+      {:protobuf_generate, "~> 0.1"},
+      {:uuid, "~> 1.1"}
     ]
   end
 end
